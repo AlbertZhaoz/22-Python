@@ -2,6 +2,7 @@ import pyautogui
 import time
 import xlrd
 import pyperclip
+import os
 
 #定义鼠标事件
 
@@ -86,12 +87,13 @@ def dataCheck(sheet1):
 #任务
 def mainWork(img):
     i = 1
+    picRootPath = os.path.abspath(os.path.join(os.getcwd(),"./"))+"\\albertpic\\"
     while i < sheet1.nrows:
         #取本行指令的操作类型
         cmdType = sheet1.row(i)[0]
         if cmdType.value == 1.0:
             #取图片名称
-            img = sheet1.row(i)[1].value
+            img = picRootPath+sheet1.row(i)[1].value
             reTry = 1
             if sheet1.row(i)[2].ctype == 2 and sheet1.row(i)[2].value != 0:
                 reTry = sheet1.row(i)[2].value
@@ -100,7 +102,7 @@ def mainWork(img):
         #2代表双击左键
         elif cmdType.value == 2.0:
             #取图片名称
-            img = sheet1.row(i)[1].value
+            img = picRootPath+ sheet1.row(i)[1].value
             #取重试次数
             reTry = 1
             if sheet1.row(i)[2].ctype == 2 and sheet1.row(i)[2].value != 0:
@@ -110,7 +112,7 @@ def mainWork(img):
         #3代表右键
         elif cmdType.value == 3.0:
             #取图片名称
-            img = sheet1.row(i)[1].value
+            img = picRootPath+ sheet1.row(i)[1].value
             #取重试次数
             reTry = 1
             if sheet1.row(i)[2].ctype == 2 and sheet1.row(i)[2].value != 0:
