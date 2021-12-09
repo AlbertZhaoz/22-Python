@@ -15,6 +15,7 @@ pip install pillow 回车
 7. 如果报错不能运行用VSCode运行看看报错内容
 8. 开始程序后请将程序框最小化，不然程序框挡住的区域是无法识别和操作的
 9. 如果程序开始后因为你选择了无限重复而鼠标被占用停不下来，alt+F4吧~
+10. if __name__ == '__main__':函数中timelist是设定发送消息的时间，分别对应早中晚，会按照你设定好的时间进行定时发送。
 
 pyautogui库其他用法 https://blog.csdn.net/qingfengxd1/article/details/108270159
 
