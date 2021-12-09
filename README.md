@@ -1,5 +1,5 @@
 # pythonautowork
-Python自动化执行脚本
+## Python自动化执行脚本
 1. 笔者安装的python3.10版本（Search python download in google explore)     
 2. 安装依赖包    
 方法：在cmd中（win+R  输入cmd  回车）输入     
@@ -19,3 +19,12 @@ pip install pillow 回车
 
 pyautogui库其他用法 https://blog.csdn.net/qingfengxd1/article/details/108270159
 
+## B站评论、点赞数抓取
+1. 执行CrawlBiliBili.py
+2. 按照提示依次输入爬取视频评论、评论回复页数、视频BV号即可爬取，爬取文件在albertBiliMessage文件夹中
+
+## 知乎话题回答批量抓取
+1. 执行CrawlZhihu.py
+2. 按照提示输入知乎话题号，点开一个知乎问题浏览器最上方网址中有一串数字。爬取文件在albertZhihuMessage文件夹中
+
+Notes:用到的一些库，import请自行安装，你可以直接安装anaconda会将常用的库帮你装好。

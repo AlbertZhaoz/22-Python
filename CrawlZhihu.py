@@ -4,16 +4,15 @@ import time
 import re
 import os
 import pandas as pd
-from openpyxl import load_workbook
 
 
 def get_data(url):
-    '''
+    """
     功能：访问 url 的网页，获取网页内容并返回
     参数：
         url ：目标网页的 url
     返回：目标网页的 html 内容
-    '''
+    """
     headers = {
         'Referer': url,
         'content-type': 'application/json',
@@ -36,11 +35,11 @@ def get_data(url):
 
 
 def parse_data(html):
-    '''
+    """
     功能：提取 html 页面信息中的关键信息，并整合一个数组并返回
     参数：html 根据 url 获取到的网页内容
     返回：存储有 html 中提取出的关键信息的数组
-    '''
+    """
     pattern = re.compile(r'<[^>]*>')  # 爬虫规则1
     pattern2 = re.compile(r'(https?|ftp|file)://[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]')  # 爬虫规则2
     json_data = json.loads(html)['data']
@@ -78,10 +77,10 @@ def parse_data(html):
 
 
 def save_data(dic):
-    '''
+    """
     功能：将comments中的信息输出到文件中/或数据库中。
-    参数：comments 将要保存的数据
-    '''
+    参数：dic 将要保存的数据
+    """
     try:
         filename = './albertZhihuMessage/comments.xlsx'
         if os.path.exists(filename):
@@ -100,12 +99,11 @@ def save_data(dic):
 # dataframe.to_csv(filename, mode='a', index=False, sep=',',
 # header=['name', 'gender', 'url', 'voteup_count', 'comment_count', 'content', 'url'])
 
-
 def main():
-    questionId = '361111920'
-    url = f'https://www.zhihu.com/api/v4/questions/{questionId}/answers?include=data%5B%2A%5D.is_normal%2Cadmin_closed_comment%2Creward_info%2Cis_collapsed%2Cannotation_action%2Cannotation_detail%2Ccollapse_reason%2Cis_sticky%2Ccollapsed_by%2Csuggest_edit%2Ccomment_count%2Ccan_comment%2Ccontent%2Ceditable_content%2Cvoteup_count%2Creshipment_settings%2Ccomment_permission%2Ccreated_time%2Cupdated_time%2Creview_info%2Crelevant_info%2Cquestion%2Cexcerpt%2Crelationship.is_authorized%2Cis_author%2Cvoting%2Cis_thanked%2Cis_nothelp%2Cis_labeled%3Bdata%5B%2A%5D.mark_infos%5B%2A%5D.url%3Bdata%5B%2A%5D.author.follower_count%2Cbadge%5B%2A%5D.topics&limit=5&offset=5&platform=desktop&sort_by=default'
+    question_id = str(input('请输入问题ID号,例如361111920:'))
+    url = f'https://www.zhihu.com/api/v4/questions/{question_id}/answers?include=data%5B%2A%5D.is_normal%2Cadmin_closed_comment%2Creward_info%2Cis_collapsed%2Cannotation_action%2Cannotation_detail%2Ccollapse_reason%2Cis_sticky%2Ccollapsed_by%2Csuggest_edit%2Ccomment_count%2Ccan_comment%2Ccontent%2Ceditable_content%2Cvoteup_count%2Creshipment_settings%2Ccomment_permission%2Ccreated_time%2Cupdated_time%2Creview_info%2Crelevant_info%2Cquestion%2Cexcerpt%2Crelationship.is_authorized%2Cis_author%2Cvoting%2Cis_thanked%2Cis_nothelp%2Cis_labeled%3Bdata%5B%2A%5D.mark_infos%5B%2A%5D.url%3Bdata%5B%2A%5D.author.follower_count%2Cbadge%5B%2A%5D.topics&limit=5&offset=5&platform=desktop&sort_by=default'
 
-    # get total cmts number
+    # get total response number
     html = get_data(url)
     totals = json.loads(html)['paging']['totals']
 
@@ -114,8 +112,8 @@ def main():
 
     page = 0
 
-    while (page < totals):
-        url = f'https://www.zhihu.com/api/v4/questions/{questionId}/answers?include=data%5B%2A%5D.is_normal%2Cadmin_closed_comment%2Creward_info%2Cis_collapsed%2Cannotation_action%2Cannotation_detail%2Ccollapse_reason%2Cis_sticky%2Ccollapsed_by%2Csuggest_edit%2Ccomment_count%2Ccan_comment%2Ccontent%2Ceditable_content%2Cvoteup_count%2Creshipment_settings%2Ccomment_permission%2Ccreated_time%2Cupdated_time%2Creview_info%2Crelevant_info%2Cquestion%2Cexcerpt%2Crelationship.is_authorized%2Cis_author%2Cvoting%2Cis_thanked%2Cis_nothelp%2Cis_labeled%3Bdata%5B%2A%5D.mark_infos%5B%2A%5D.url%3Bdata%5B%2A%5D.author.follower_count%2Cbadge%5B%2A%5D.topics&limit=5&offset=' + str(
+    while page < totals:
+        url = f'https://www.zhihu.com/api/v4/questions/{question_id}/answers?include=data%5B%2A%5D.is_normal%2Cadmin_closed_comment%2Creward_info%2Cis_collapsed%2Cannotation_action%2Cannotation_detail%2Ccollapse_reason%2Cis_sticky%2Ccollapsed_by%2Csuggest_edit%2Ccomment_count%2Ccan_comment%2Ccontent%2Ceditable_content%2Cvoteup_count%2Creshipment_settings%2Ccomment_permission%2Ccreated_time%2Cupdated_time%2Creview_info%2Crelevant_info%2Cquestion%2Cexcerpt%2Crelationship.is_authorized%2Cis_author%2Cvoting%2Cis_thanked%2Cis_nothelp%2Cis_labeled%3Bdata%5B%2A%5D.mark_infos%5B%2A%5D.url%3Bdata%5B%2A%5D.author.follower_count%2Cbadge%5B%2A%5D.topics&limit=5&offset=' + str(
             page) + '&platform=desktop&sort_by=default'
 
         html = get_data(url)
@@ -130,4 +128,4 @@ def main():
 
 if __name__ == '__main__':
     main()
-    print("完成！！")
+    print("Done！！")

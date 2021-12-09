@@ -125,12 +125,12 @@ def get_reply(data, tab=0):
 if __name__ == '__main__':
     pages1 = int(input('请输入爬取"视频评论"的页数(每页20条),推荐10:'))
     pages2 = int(input('请输入爬取"评论回复(楼中楼)"的页数(每页10条),推荐03:'))
-
-    # 每次调用链接后的休息时间，胆子大就改小点
-    sleep_time = 2.1  # 访问网页间隔，防止IP被禁，若运行程序后出现无法访问评论区的现象，等待2小时即可
-
     # 记得在这里输入视频的BV号！
-    bv = 'BV1pK41137He'
+    bv = str(input('请输入视频的BV号,例如BV1pK41137He:'))
+
+    # 每次调用链接后的休息时间
+    # 访问网页间隔，防止IP被禁，若运行程序后出现无法访问评论区的现象，等待2小时即可
+    sleep_time = 2.1
 
     oid = get_oid(bv)
     f = open(f'./albertBiliMessage/{time.strftime("%Y%m%d-%H%M")}.txt', 'w', encoding='utf-8')
