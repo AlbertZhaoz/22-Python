@@ -28,3 +28,4 @@ pyautogui库其他用法 https://blog.csdn.net/qingfengxd1/article/details/10827
 2. 按照提示输入知乎话题号，点开一个知乎问题浏览器最上方网址中有一串数字。爬取文件在albertZhihuMessage文件夹中
 
 Notes:用到的一些库，import请自行安装，你可以直接安装anaconda会将常用的库帮你装好。
+anaconda下载地址：https://www.anaconda.com/products/distribution/download-success-pythonanywhere
